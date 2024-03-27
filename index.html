@@ -1,217 +1,598 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVG Group Click Toggle and Duplicate</title>
-    <style>
-        /* Style to visually indicate the group is clickable */
-        .clickableGroup {
-            cursor: pointer;
-        }
-        /* Ensure SVGs are inline */
-        .containerSVG {
-            display: flex;
-            vertical-align: top;
-            margin-right:-20px;
-        }
-        .dynamic-svg{
-            margin-right:-20px;
-        }
-        .scrolling-container {
-    width: 100%; /* or any fixed width */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevent wrapping of inline elements */
-}
-
-.svg-wrapper {
-    display: flex; /* Use flexbox to layout children inline */
-    flex-direction: row; /* Arrange children in a row */
-}
-
-  /* Style the buttons to display inline */
-  .inline-button {
-    display: inline-block; /* Display buttons inline */
-    margin-right: 10px; /* Add some space between buttons */
-    padding: 10px 20px; /* Padding for button size */
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change mouse cursor on hover */
-  }
-  /* Change background color on hover */
-  .inline-button:hover {
-    background-color: #0056b3;
-  }
-
-    </style>
+    <title>MV Schematic</title>
+    <link rel="stylesheet" href="./styless.css">
 </head>
-<body>
 
-    <div class="scrolling-container">
-        <div class="svg-wrapper">
-            <div class="earth">
-                <svg width="160" height="200" xmlns="http://www.w3.org/2000/svg">
-                    <g class="earthSw" id="group1">
-                     <title>Layer 1</title>
-                     <text xml:space="preserve" text-anchor="start" font-family="'Archivo'" font-size="16" id="svg_21" y="16.00065" x="51.30104" stroke-width="0" stroke="#00bf00" fill="#000000">EARTH</text>
-                     <line stroke="#bf0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="23.16787" x2="161.10981" y1="23.16787" x1="-1.26523" stroke-width="3" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="61.89527" x2="79.90199" y1="21.5012" x1="79.90199" stroke-width="3" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="153.26288" x2="79.90199" y1="82.83478" x1="79.90199" stroke-width="3" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="earthLine" y2="60.88111" x2="79.91355" y1="82.94745" x1="79.91355" stroke-width="3" fill="none"/>
-                     <line stroke="#bf5f00" id="svg_16" y2="54.36771" x2="83.43487" y1="62.0344" x1="76.43485" fill="none"/>
-                     <line stroke="#bf5f00" id="svg_17" y2="62.0344" x2="83.43487" y1="54.70105" x1="76.43485" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_12" y2="153.61789" x2="88.68459" y1="153.61789" x1="71.35121" stroke-width="3" fill="none"/>
-                     <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_13" y2="157.95124" x2="86.36834" y1="157.95124" x1="73.35122" stroke-width="3" stroke="#00bf00" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_14" y2="162.28458" x2="84.35819" y1="162.28458" x1="75.60123" stroke-width="3" fill="none"/>
-                    </g>
-                   
-                   </svg>
-            </div>
+<body>
+    <div class="sidebar">
+        <h2>CyrusOne Mimic</h2>
+        <ul>
+            <li><a href="./index.html">MV Schematic</a></li>
+                <li><a href="./EpodE.html">Epod E</a></li>
+            <li><a href="./EpodF.html">Epod F</a></li>
+            <li><a href="#">Epod F</a></li>
+            <li><a href="#">Epod H</a></li>
             
-            <div id="svgContainer"></div> <!-- Container for dynamically generated SVGs -->
-        
-            <div class="earth">
-                <svg width="160" height="200" xmlns="http://www.w3.org/2000/svg">
-                    <g class="earthSw" id="group2">
-                     <title>Layer 1</title>
-                     <text xml:space="preserve" text-anchor="start" font-family="'Archivo'" font-size="16" id="svg_21" y="16.00065" x="51.30104" stroke-width="0" stroke="#00bf00" fill="#000000">EARTH</text>
-                     <line stroke="#bf0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="23.16787" x2="161.10981" y1="23.16787" x1="-1.26523" stroke-width="3" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="61.89527" x2="79.90199" y1="21.5012" x1="79.90199" stroke-width="3" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="153.26288" x2="79.90199" y1="82.83478" x1="79.90199" stroke-width="3" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="earthLine1" y2="60.88111" x2="79.91355" y1="82.94745" x1="79.91355" stroke-width="3" fill="none"/>
-                     <line stroke="#bf5f00" id="svg_16" y2="54.36771" x2="83.43487" y1="62.0344" x1="76.43485" fill="none"/>
-                     <line stroke="#bf5f00" id="svg_17" y2="62.0344" x2="83.43487" y1="54.70105" x1="76.43485" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_12" y2="153.61789" x2="88.68459" y1="153.61789" x1="71.35121" stroke-width="3" fill="none"/>
-                     <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_13" y2="157.95124" x2="86.36834" y1="157.95124" x1="73.35122" stroke-width="3" stroke="#00bf00" fill="none"/>
-                     <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_14" y2="162.28458" x2="84.35819" y1="162.28458" x1="75.60123" stroke-width="3" fill="none"/>
-                    </g>
-                   
-                   </svg>
-            </div>
-        </div>
+        </ul>
     </div>
 
-    <button class="inline-button">MV A Switchroom</button>
-<button class="inline-button">MV B Switchroom</button>
-<button class="inline-button">Generators</button>
-<button class="inline-button">Generators</button>
+    <div class="content">
+        <div id="svg_wrapper"  class="scrollable-div" id="scrollableDiv">
+
+                      
+            <svg id="svg-container" style="background-image: url('./img/MVSchematic.jpg'); background-repeat: no-repeat; background-size: cover; padding-left: 10px; position: relative;"
+            width="4200" height="2737" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="null">
+                <g id="Layer_1">
+                 <title>Layer 1</title>
+                 <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_146" y2="591.68514" x2="4034.05628" y1="591.68514" x1="2488.41543" stroke-width="5" fill="none"/>
+      <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_4" y2="591.68514" x2="2240.05972" y1="591.68514" x1="634.41907" stroke-width="5" fill="none"/>
+      <line stroke="#ff0000" style="vector-effect: non-scaling-stroke;" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_144" y2="622.01725" x2="1945.03106" y1="592.01857" x1="1945.03106" stroke-width="6" fill="none"/>
+      <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="622.01725" x2="2950.02909" y1="590.01858" x1="2950.02909" stroke-width="6" stroke="#ff0000" fill="none"/>
+      <g>
+        <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_147" y2="2184.64073" x2="3486.69579" y1="2227.34261" x1="3486.69579" stroke-width="6" fill="none"/>
+        <line transform="rotate(-180 3486.37 2342.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_39" y2="2459.09277" x2="3486.36966" y1="2226.34574" x1="3486.36966" stroke-width="6" fill="none"/>
+    
+      </g>
+      
+      
+      <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_24" y2="2068.64097" x2="3627.69552" y1="2111.34285" x1="3627.69552" stroke-width="6" fill="none"/>
+      <g id="svg_143">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_136" y2="680.34819" x2="1914.66997" y1="680.34819" x1="1945.36433" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_137" y2="677.64463" x2="1912.69895" y1="701.68063" x1="1912.69895" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_138" y2="741.64196" x2="1912.69895" y1="769.67779" x1="1912.69895" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1913.7 770.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_139" y2="758.64191" x2="1913.69893" y1="782.67775" x1="1913.69893" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1913.2 776.659)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_140" y2="769.14102" x2="1913.20004" y1="784.17688" x1="1913.20004" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1914.2 782.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_141" y2="778.14184" x2="1914.19896" y1="787.17773" x1="1914.19896" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_142" y2="701.64364" x2="1912.69895" y1="744.34551" x1="1912.69895" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_38">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_31" y2="679.3482" x2="2919.66801" y1="679.3482" x1="2950.36237" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_32" y2="676.64463" x2="2917.69698" y1="700.68063" x1="2917.69698" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_33" y2="740.64196" x2="2917.69698" y1="768.67779" x1="2917.69698" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2918.7 769.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_34" y2="757.64191" x2="2918.69696" y1="781.67775" x1="2918.69696" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2918.2 775.659)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_35" y2="768.14103" x2="2918.19808" y1="783.17688" x1="2918.19808" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2919.2 781.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_36" y2="777.14184" x2="2919.197" y1="786.17773" x1="2919.197" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_37" y2="700.64364" x2="2917.69698" y1="743.34551" x1="2917.69698" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_163">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_156" y2="1945.34571" x2="1125.67156" y1="1945.34571" x1="1156.36592" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_157" y2="1942.64214" x2="1123.70053" y1="1966.67814" x1="1123.70053" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_158" y2="2006.63947" x2="1123.70053" y1="2034.6753" x1="1123.70053" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1124.7 2035.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_159" y2="2023.63943" x2="1124.70051" y1="2047.67526" x1="1124.70051" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1124.2 2041.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_160" y2="2034.13854" x2="1124.20163" y1="2049.17439" x1="1124.20163" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1125.2 2047.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_161" y2="2043.13935" x2="1125.20054" y1="2052.17524" x1="1125.20054" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_162" y2="1966.64115" x2="1123.70053" y1="2009.34303" x1="1123.70053" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_83">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_76" y2="1948.3457" x2="1363.67108" y1="1948.3457" x1="1394.36544" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_77" y2="1945.64214" x2="1361.70006" y1="1969.67814" x1="1361.70006" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_78" y2="2009.63947" x2="1361.70006" y1="2037.6753" x1="1361.70006" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1362.7 2038.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_79" y2="2026.63942" x2="1362.70003" y1="2050.67526" x1="1362.70003" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1362.2 2044.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_80" y2="2037.13853" x2="1362.20115" y1="2052.17439" x1="1362.20115" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1363.2 2050.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_81" y2="2046.13935" x2="1363.20007" y1="2055.17523" x1="1363.20007" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_82" y2="1969.64114" x2="1361.70006" y1="2012.34302" x1="1361.70006" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_109">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_102" y2="1945.34572" x2="2108.66962" y1="1945.34572" x1="2139.36398" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_103" y2="1942.64215" x2="2106.69859" y1="1966.67815" x1="2106.69859" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_104" y2="2006.63948" x2="2106.69859" y1="2034.67531" x1="2106.69859" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2107.7 2035.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_105" y2="2023.63943" x2="2107.69857" y1="2047.67527" x1="2107.69857" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2107.2 2041.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_106" y2="2034.13855" x2="2107.19969" y1="2049.1744" x1="2107.19969" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2108.2 2047.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_107" y2="2043.13936" x2="2108.19861" y1="2052.17525" x1="2108.19861" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_108" y2="1966.64116" x2="2106.69859" y1="2009.34303" x1="2106.69859" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_64">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_57" y2="1946.34571" x2="2846.66815" y1="1946.34571" x1="2877.36251" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_58" y2="1943.64215" x2="2844.69713" y1="1967.67815" x1="2844.69713" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_59" y2="2007.63948" x2="2844.69713" y1="2035.67531" x1="2844.69713" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2845.7 2036.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_60" y2="2024.63943" x2="2845.6971" y1="2048.67527" x1="2845.6971" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2845.2 2042.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_61" y2="2035.13855" x2="2845.19822" y1="2050.1744" x1="2845.19822" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2846.2 2048.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_62" y2="2044.13936" x2="2846.19714" y1="2053.17525" x1="2846.19714" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_63" y2="1967.64116" x2="2844.69713" y1="2010.34303" x1="2844.69713" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_91">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_84" y2="1949.3457" x2="1866.67007" y1="1949.3457" x1="1897.36444" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_85" y2="1946.64213" x2="1864.69905" y1="1970.67813" x1="1864.69905" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_86" y2="2010.63946" x2="1864.69905" y1="2038.6753" x1="1864.69905" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1865.7 2039.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_87" y2="2027.63942" x2="1865.69903" y1="2051.67526" x1="1865.69903" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1865.2 2045.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_88" y2="2038.13853" x2="1865.20015" y1="2053.17439" x1="1865.20015" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1866.2 2051.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_89" y2="2047.13935" x2="1866.19906" y1="2056.17523" x1="1866.19906" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_90" y2="1970.64114" x2="1864.69905" y1="2013.34302" x1="1864.69905" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_117">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_110" y2="1946.34571" x2="2611.66861" y1="1946.34571" x1="2642.36297" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_111" y2="1943.64215" x2="2609.69758" y1="1967.67815" x1="2609.69758" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_112" y2="2007.63948" x2="2609.69758" y1="2035.67531" x1="2609.69758" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2610.7 2036.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_113" y2="2024.63943" x2="2610.69756" y1="2048.67527" x1="2610.69756" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2610.2 2042.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_114" y2="2035.13855" x2="2610.19868" y1="2050.1744" x1="2610.19868" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2611.2 2048.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_115" y2="2044.13936" x2="2611.1976" y1="2053.17525" x1="2611.1976" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_116" y2="1967.64116" x2="2609.69758" y1="2010.34303" x1="2609.69758" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_130">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_123" y2="1947.34571" x2="3349.66715" y1="1947.34571" x1="3380.36151" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_124" y2="1944.64215" x2="3347.69612" y1="1968.67815" x1="3347.69612" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_125" y2="2008.63948" x2="3347.69612" y1="2036.67531" x1="3347.69612" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 3348.7 2037.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_126" y2="2025.63943" x2="3348.6961" y1="2049.67527" x1="3348.6961" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 3348.2 2043.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_127" y2="2036.13854" x2="3348.19722" y1="2051.1744" x1="3348.19722" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 3349.2 2049.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_128" y2="2045.13936" x2="3349.19613" y1="2054.17525" x1="3349.19613" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_129" y2="1968.64115" x2="3347.69612" y1="2011.34303" x1="3347.69612" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_29">
+       <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_9" y2="1947.34571" x2="3594.66666" y1="1947.34571" x1="3625.36102" stroke-width="6" stroke="#00bf5f" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_10" y2="1944.64215" x2="3592.69563" y1="1968.67815" x1="3592.69563" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_13" y2="2008.63948" x2="3592.69563" y1="2036.67531" x1="3592.69563" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 3593.7 2037.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_14" y2="2025.63943" x2="3593.69561" y1="2049.67527" x1="3593.69561" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 3593.2 2043.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_15" y2="2036.13854" x2="3593.19673" y1="2051.1744" x1="3593.19673" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 3594.2 2049.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_11" y2="2045.13936" x2="3594.19565" y1="2054.17525" x1="3594.19565" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_22" y2="1968.64115" x2="3592.69563" y1="2011.34303" x1="3592.69563" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_176">
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_169" y2="2259.34509" x2="1224.67128" y1="2259.34509" x1="1260.36564" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_170" y2="2256.64152" x2="1224.70018" y1="2280.67752" x1="1224.70018" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_171" y2="2320.63885" x2="1224.70018" y1="2348.67469" x1="1224.70018" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1296.7 2349.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_172" y2="2432.63881" x2="1296.70016" y1="2409.67465" x1="1296.70016" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1296.2 2355.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_173" y2="2434.13792" x2="1296.20128" y1="2418.17378" x1="1296.20128" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 1297.2 2361.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_174" y2="2438.13874" x2="1297.2002" y1="2430.17462" x1="1297.2002" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_175" y2="2280.64053" x2="1224.70018" y1="2323.34241" x1="1224.70018" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_188">
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_181" y2="2260.34509" x2="2000.66979" y1="2260.34509" x1="1968.36414" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_182" y2="2257.64152" x2="1968.69869" y1="2281.67752" x1="1968.69869" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_183" y2="2321.63885" x2="1968.69869" y1="2349.67468" x1="1968.69869" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2040.7 2350.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_184" y2="2434.63881" x2="2040.69867" y1="2410.67464" x1="2040.69867" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2040.2 2356.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_185" y2="2436.13792" x2="2040.19978" y1="2420.17377" x1="2040.19978" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2041.2 2362.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_186" y2="2439.13873" x2="2041.1987" y1="2430.17462" x1="2041.1987" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_187" y2="2281.64053" x2="1968.69869" y1="2324.34241" x1="1968.69869" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_212">
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_205" y2="2261.34508" x2="2748.66832" y1="2261.34508" x1="2711.36268" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_206" y2="2258.64152" x2="2711.69722" y1="2282.67752" x1="2711.69722" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_207" y2="2322.63885" x2="2711.69722" y1="2350.67468" x1="2711.69722" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2783.7 2351.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_208" y2="2412.6388" x2="2783.6972" y1="2435.67464" x1="2783.6972" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2783.2 2357.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_209" y2="2420.13792" x2="2783.19832" y1="2438.17377" x1="2783.19832" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 2784.2 2363.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_210" y2="2432.13873" x2="2784.19724" y1="2442.17462" x1="2784.19724" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_211" y2="2282.64053" x2="2711.69722" y1="2325.3424" x1="2711.69722" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_164">
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_43" y2="2259.34509" x2="3488.66686" y1="2259.34509" x1="3521.36121" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_44" y2="2256.64152" x2="3522.69576" y1="2280.67752" x1="3522.69576" stroke-width="6" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_45" y2="2320.63885" x2="3522.69576" y1="2348.67469" x1="3522.69576" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 3523.7 2349.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_46" y2="2337.63881" x2="3523.69574" y1="2361.67465" x1="3523.69574" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 3523.2 2355.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_47" y2="2348.13792" x2="3523.19685" y1="2363.17378" x1="3523.19685" stroke-width="4" fill="none"/>
+       <line transform="rotate(90 3524.2 2361.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_48" y2="2357.13874" x2="3524.19577" y1="2366.17462" x1="3524.19577" stroke-width="4" fill="none"/>
+       <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_49" y2="2280.64053" x2="3522.69576" y1="2323.34241" x1="3522.69576" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_217">
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_133" y2="1104.09561" x2="1944.36434" y1="657.34903" x1="1944.36434" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1783.36 1101.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_19" y2="1265.09532" x2="1783.36464" y1="938.34847" x1="1783.36464" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_20" y2="1633.09466" x2="1622.36495" y1="1099.34817" x1="1622.36495" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1387.87 1631.22)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_21" y2="1868.58876" x2="1387.86902" y1="1393.84216" x1="1387.86902" stroke-width="6" fill="none"/>
+       <line transform="rotate(-180 1153.37 1849.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_155" y2="2067.09344" x2="1153.36623" y1="1632.34676" x1="1153.36623" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_134" y2="619.6438" x2="1944.69889" y1="662.34567" x1="1944.69889" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_218">
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_153" y2="2066.64097" x2="1153.70043" y1="2109.34284" x1="1153.70043" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_151" y2="2106.64089" x2="1153.70043" y1="2147.34277" x1="1153.70043" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_167" y2="2149.64081" x2="1259.70022" y1="2186.3427" x1="1259.70022" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_72" y2="2109.64088" x2="1396.69994" y1="2150.34276" x1="1396.69994" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1203.2 2147.99)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_66" y2="1860.1413" x2="1203.20059" y1="2435.84198" x1="1203.20059" stroke-width="6" fill="none"/>
+      </g>
+
+      <g id="svg_219">
+       <line transform="rotate(-180 1259.37 2342.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_165" y2="2459.09277" x2="1259.37408" y1="2226.34574" x1="1259.37408" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_166" y2="2184.64073" x2="1260" y1="2227.34261" x1="1259.70022" stroke-width="6" fill="none"/>
+        <!-- Circle button at the end of the line -->
+        <a href="./EpodE.html">
+            <circle id="circleButton" cx="1259.37408" cy="2480" r="30" fill="#ff0000" />
+        </a>
+                   
+    </g>
+
+    <!-- Optional: Text for the button -->
+    <text x="1259.37408" y="2480" text-anchor="middle" stroke="#fff" stroke-width="1px" dy=".3em" fill="white">Epod E</text>
+
+      <g id="svg_220">
+       <line transform="rotate(-180 1396.37 1952.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_67" y2="2070.09366" x2="1396.36546" y1="1835.34658" x1="1396.36546" stroke-width="6" fill="none"/>
+       <line transform="rotate(-180 1899.36 1953.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_68" y2="2071.09366" x2="1899.36445" y1="1836.34658" x1="1899.36445" stroke-width="6" fill="none"/>
+       <line transform="rotate(-90 1648.36 1838.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_69" y2="2092.09374" x2="1648.36486" y1="1585.34717" x1="1648.36486" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_70" y2="2069.64096" x2="1396.69994" y1="2112.34284" x1="1396.69994" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_221">
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_71" y2="2070.64096" x2="1899.69894" y1="2113.34284" x1="1899.69894" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_179" y2="2149.64081" x2="2002.69872" y1="2186.3427" x1="2002.69872" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_98" y2="2106.6409" x2="2141.69848" y1="2147.34278" x1="2141.69848" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_73" y2="2110.64088" x2="1899.69894" y1="2147.34277" x1="1899.69894" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 1951.2 2147.99)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_92" y2="1860.1413" x2="1951.19911" y1="2435.84198" x1="1951.19911" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_222">
+       <line transform="rotate(-180 2003.37 2343.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_177" y2="2460.09277" x2="2003.37259" y1="2227.34573" x1="2003.37259" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_178" y2="2185.64073" x2="2003.69872" y1="2228.34261" x1="2003.69872" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_223">
+       <line transform="rotate(-180 2141.36 1949.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_93" y2="2067.09368" x2="2141.36399" y1="1832.34659" x1="2141.36399" stroke-width="6" fill="none"/>
+       <line transform="rotate(-180 2644.36 1950.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_94" y2="2068.09368" x2="2644.36298" y1="1833.34659" x1="2644.36298" stroke-width="6" fill="none"/>
+       <line transform="rotate(-90 2393.36 1835.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_95" y2="2089.09376" x2="2393.3634" y1="1582.34719" x1="2393.3634" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_96" y2="2066.64098" x2="2141.69848" y1="2109.34285" x1="2141.69848" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_224">
+        <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_97" y2="2067.64097" x2="2644.69747" y1="2110.34285" x1="2644.69747" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_203" y2="2150.64081" x2="2745.69726" y1="2187.3427" x1="2745.69726" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_55" y2="2107.64089" x2="2879.69701" y1="2148.34278" x1="2879.69701" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_99" y2="2107.64089" x2="2644.69747" y1="2144.34279" x1="2644.69747" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 2692.7 2147.99)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_118" y2="1863.6403" x2="2692.6952" y1="2432.341" x1="2692.6952" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_225">
+       <line transform="rotate(-180 2879.36 1950.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_53" y2="2068.09368" x2="2879.36253" y1="1833.34659" x1="2879.36253" stroke-width="6" fill="none"/>
+       <line transform="rotate(-180 3382.36 1951.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_119" y2="2069.09367" x2="3382.36152" y1="1834.34659" x1="3382.36152" stroke-width="6" fill="none"/>
+       <line transform="rotate(-90 3131.36 1836.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_52" y2="2090.09375" x2="3131.36193" y1="1583.34719" x1="3131.36193" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_54" y2="2067.64097" x2="2879.69701" y1="2110.34285" x1="2879.69701" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_226">
+       <line transform="rotate(-180 2746.37 2344.72)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_201" y2="2461.09277" x2="2746.37112" y1="2228.34573" x1="2746.37112" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_202" y2="2186.64073" x2="2746.69726" y1="2229.3426" x1="2746.69726" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_227">
+        <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_120" y2="2068.64097" x2="3382.69601" y1="2111.34285" x1="3382.69601" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_148" y2="2148.64081" x2="3485.69579" y1="2185.3427" x1="3485.69579" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_121" y2="2108.64089" x2="3382.69601" y1="2145.34278" x1="3382.69601" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_25" y2="2108.64089" x2="3627.69552" y1="2145.34278" x1="3627.69552" stroke-width="6" fill="none"/>
+       <line transform="rotate(90 3436.69 2146.99)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_17" y2="1862.6403" x2="3436.69374" y1="2431.341" x1="3436.69374" stroke-width="6" fill="none"/>
+      </g>
+      <g id="svg_228">
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_18" y2="1630.09455" x2="2949.36237" y1="656.34901" x1="2949.36237" stroke-width="6" fill="none"/>
+       <line transform="rotate(-180 3627.37 1848.22)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_131" y2="2069.09344" x2="3627.37031" y1="1627.34686" x1="3627.37031" stroke-width="6" fill="none"/>
+       <line transform="rotate(-90 3285.87 1631.22)" stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_132" y2="1970.59191" x2="3285.87075" y1="1291.84586" x1="3285.87075" stroke-width="6" fill="none"/>
+       <line stroke="#ff0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_8" y2="617.31053" x2="2949.69692" y1="660.0124" x1="2949.69692" stroke-width="6" fill="none"/>
+      </g>
+      <text transform="matrix(1.39394 0 0 1.42298 -681.524 236.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_16" y="1289.08267" x="3085.72471" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -68.5252 358.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_149" y="1288.37992" x="2544.09452" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -681.524 236.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_122" y="1289.08267" x="2909.96416" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 63.4745 233.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_56" y="1290.48816" x="2014.6611" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -681.524 236.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_101" y="1288.37992" x="2380.53033" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -68.5252 358.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_204" y="1289.78542" x="2013.22623" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 63.4745 233.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_100" y="1289.78542" x="1485.22759" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -681.524 236.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_75" y="1290.48817" x="1846.07476" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -68.5252 358.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_180" y="1289.08267" x="1480.20576" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -681.524 236.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_74" y="1289.78542" x="1485.22759" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -580.524 362.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_168" y="1284.86617" x="1314.48877" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -686.524 236.175)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_152" y="1287.67717" x="1314.48877" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.24815 -766.524 -141.176)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_135" y="615.55346" x="1939.33548" stroke-width="0" fill="#bf0000">x</text>
+      <text transform="matrix(1.39394 0 0 1.42298 -766.524 -250.824)" stroke="#00bf5f" xml:space="preserve" text-anchor="start" font-family="'Caveat'" font-size="24" id="svg_23" y="615.14602" x="2660.31203" stroke-width="0" fill="#bf0000">x</text>
+       
+     
+  
 
        
+            
+    </svg>
+                      
+               
+        </div>
+    </div>
+</body>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+//var svgIds = ['svg_142', 'svg_162', 'svg_82', 'svg_175', 'svg_90', 'svg_108', 'svg_96', 'svg_187', 'svg_116', 'svg_63', 'svg_54', 'svg_202', 'svg_129', 'svg_22', 'svg_49', 'svg_37'];
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const titles = ["Spare", "Data Hall 12", "Data Hall 11", "Data Hall 10", "Data Hall 9", "Data Hall 8", "Data Hall 7", "Data Hall 2", "Data Hall 4", "Data Hall 3", "Data Hall 6", "MVA 1", "Data Hall 1"]; // Example titles
-    generateSVGs(titles);
-});
+// Centralized state objects for each type of switch
+//let lineSwitchStates = {};
+//let earthSwitchStates = {};
 
-function generateSVGs(titles) {
-    const container = document.getElementById('svgContainer');
-    titles.forEach((title, index) => {
-        // Unique IDs for each SVG instance
-        const lvGroupId = `lvGroup${index}`;
-        const hvGroupId = `hvGroup${index}`;
-        const lineAId = `lineA${index}`;
-        const lineBId = `lineB${index}`;
+// IDs for line switches and earth switches
+const lineSvgIds = ['svg_134', 'svg_153', 'svg_70', 'svg_166', 'svg_71', 'svg_178', 'svg_96', 'svg_97', 'svg_202', 'svg_54', 'svg_120', 'svg_147'];
+const earthSvgIds = ['svg_142', 'svg_162', 'svg_82', 'svg_175', 'svg_90', 'svg_108', 'svg_96', 'svg_187', 'svg_116', 'svg_63', 'svg_54', 'svg_202', 'svg_129', 'svg_22', 'svg_49', 'svg_37'];
 
-        // SVG template string with dynamic IDs and title
-        let svgTemplate = `
-            <svg class="dynamic-svg" width="160" height="200" xmlns="http://www.w3.org/2000/svg">
-                <g id="Layer_${index}">
-                    <title>Layer ${index}</title>
-                    <text xml:space="preserve" text-anchor="start" font-family="'Archivo'" font-size="16" id="textTitle${index}" y="16.00065" x="51.30104" stroke-width="0" stroke="#00bf00" fill="#000000">${title}</text>
-                    <g id="${lvGroupId}" class="clickableGroup">
-                        <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="62.89527" x2="79.90199" y1="22.5012" x1="79.90199" stroke-width="3" fill="none"/>
-                        <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="182.26288" x2="79.90199" y1="83.83478" x1="79.90199" stroke-width="3" fill="none"/>
-                        <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="${lineAId}" y2="61.88111" x2="79.91355" y1="83.94745" x1="79.91355" stroke-width="3" fill="none"/>
-                        <path transform="rotate(178.415 80.1639 184.658)" stroke="#00bf00" id="svg_20" d="m78.63261,184.65193l1.53132,-2.65721l1.53132,2.65721l-0.76566,0l0,2.66999l-1.53132,0l0,-2.66999l-0.76566,0z" stroke-width="3" fill="none"/>
-                    </g>
-                        <line stroke="#bf5f00" id="svg_16" y2="55.36771" x2="83.43487" y1="63.0344" x1="76.43485" fill="none"/>
-                        <line stroke="#bf5f00" id="svg_17" y2="63.0344" x2="83.43487" y1="55.70105" x1="76.43485" fill="none"/>
-                        <line stroke="#bf0000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="23.16787" x2="161.10981" y1="23.16787" x1="-1.26523" stroke-width="3" fill="none"/>
-                    <g id="${hvGroupId}" class="clickableGroup">
-                        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="102.0345" x2="26.28493" y1="102.0345" x1="79.76819" stroke-width="3" stroke="#00bf00" fill="none"/>
-          <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_9" y2="120.74714" x2="27.76805" y1="101.36783" x1="27.76805" stroke-width="3" stroke="#00bf00" fill="none"/>
-          <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="${lineBId}" y2="120.02364" x2="27.76805" y1="141.20125" x1="27.76805" stroke-width="3" fill="none"/>
-          <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_11" y2="154.36797" x2="27.76805" y1="139.70127" x1="27.76805" stroke-width="3" stroke="#00bf00" fill="none"/>
-          <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_12" y2="154.36797" x2="36.43474" y1="154.36797" x1="19.10136" stroke-width="3" fill="none"/>
-          <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_13" y2="158.70132" x2="34.11849" y1="158.70132" x1="21.10137" stroke-width="3" stroke="#00bf00" fill="none"/>
-          <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_14" y2="163.03466" x2="32.10834" y1="163.03466" x1="23.35138" stroke-width="3" fill="none"/>
-          <line stroke="#00bf00" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_18" y2="119.70121" x2="33.48301" y1="119.70121" x1="22.10137" stroke-width="3" fill="none"/>
-                    </g>
-                    <!-- Other SVG content -->
-                </g>
-            </svg>
-        `;
 
-        // Append the SVG to the container
-        container.insertAdjacentHTML('beforeend', svgTemplate);
+class Switch {
+  constructor(id, originalX2) {
+    this.id = id;
+    this.originalX2 = originalX2;
+    this.isOpen = false;
+    this.svg = d3.select('#' + id);
+    this.loadState();
+  }
 
-        // Attach event listeners to the newly created SVG elements
-        attachEventListeners(lvGroupId, lineAId, hvGroupId, lineBId);
-    });
+  toggleState() {
+    this.isOpen = !this.isOpen;
+    this.updateAppearance();
+    this.saveState();
+  }
+
+  loadState() {
+    let savedState = JSON.parse(localStorage.getItem(this.id) || '{}');
+    this.isOpen = savedState.isOpen || false;
+    this.originalX2 = savedState.originalX2 || this.originalX2;
+    this.updateAppearance();
+  }
+
+  saveState() {
+    localStorage.setItem(this.id, JSON.stringify({ isOpen: this.isOpen, originalX2: this.originalX2 }));
+  }
+
+  updateAppearance() {
+    // Default implementation, to be overridden by subclasses
+    let newX2 = this.isOpen ? this.originalX2 - 20 : this.originalX2;
+    this.svg.attr("x2", newX2);
+  }
 }
 
-function attachEventListeners(lvGroupId, lineAId, hvGroupId, lineBId) {
-    const lvGroup = document.getElementById(lvGroupId);
-    const hvGroup = document.getElementById(hvGroupId);
-    const lineA = document.getElementById(lineAId);
-    const lineB = document.getElementById(lineBId);
+class LineSwitch extends Switch {
+  updateAppearance() {
+    super.updateAppearance(); // Call base method to adjust x2
+    let newColor = this.isOpen ? "green" : "#ff0000";
+    this.svg.style("stroke", newColor);
+    // Additional code to change the circle's fill color
+    if(this.id === 'svg_166') {
+       
+      let circle = d3.select(this.svg.node().parentNode).select('#circleButton');
+      
+      circle.attr('fill', newColor);
+    }
+    d3.select(this.svg.node().parentNode).selectAll('*').style("stroke", newColor);
+  }
+}
 
-    lvGroup.addEventListener('click', function() {
-        // Toggle functionality for lvGroup
-        this.querySelectorAll('line, path').forEach(elem => {
-            elem.setAttribute('stroke', elem.getAttribute('stroke') === '#00bf00' ? 'red' : '#00bf00');
-        });
-        lineA.setAttribute('x2', lineA.getAttribute('x2') === '79.91355' ? '95' : '79.91355');
-    });
+class EarthSwitch extends Switch {
+  // Inherits everything from Switch, but can have custom methods or overrides if necessary
+}
 
-    hvGroup.addEventListener('click', function() {
-        // Toggle functionality for hvGroup
-        lineB.setAttribute('x2', lineB.getAttribute('x2') === '27.76805' ? '42' : '27.76805');
-        lineB.setAttribute('y2', lineB.getAttribute('y2') === '120.02364' ? '123' : '120.02364');
-    });
+// Initialize switches
+function initializeSwitches(svgIds, isLineSwitch) {
+  svgIds.forEach(id => {
+    let originalX2 = parseFloat(d3.select('#' + id).attr("x2"));
+    let switchInstance = isLineSwitch ? new LineSwitch(id, originalX2) : new EarthSwitch(id, originalX2);
+
+    switchInstance.svg.on('click', () => switchInstance.toggleState());
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Function to toggle the x2 attribute value for a specific line
-    function toggleX2(event) {
-        // Determine which group was clicked and select the corresponding line
-        var groupId = event.currentTarget.getAttribute('id');
-        var lineId = groupId === "group1" ? "earthLine" : "earthLine1";
-        var line = document.getElementById(lineId);
-
-        var currentX2 = line.getAttribute("x2");
-        var originalX2 = line.dataset.originalX2 || "79.91355"; // Assuming the original value is 79.91355
-
-        // Toggle the x2 attribute
-        if (currentX2 === "94") {
-            line.setAttribute("x2", originalX2);
-        } else {
-            // Save the original x2 value if not already saved
-            if (!line.dataset.originalX2) {
-                line.dataset.originalX2 = currentX2;
-            }
-            line.setAttribute("x2", "94");
-        }
-    }
-
-    // Assign IDs to the group elements for easier selection
-    // Assuming you add these IDs directly in the HTML or dynamically via script
-    // <g class="earthSw" id="group1">...</g>
-    // <g class="earthSw" id="group2">...</g>
-
-    // Get the group elements by their new IDs
-    var group1 = document.getElementById("group1");
-    var group2 = document.getElementById("group2");
-
-    // Attach the click event listener to each group
-    if(group1) group1.addEventListener("click", toggleX2);
-    if(group2) group2.addEventListener("click", toggleX2);
+  initializeSwitches(lineSvgIds, true); // Line switches
+  initializeSwitches(earthSvgIds, false); // Earth switches
+ 
 });
 
 
-</script>
 
-</body>
+/*
+// Function to toggle the state of a switch
+function toggleSwitchState(id, isLineSwitch) {
+  let state = isLineSwitch ? lineSwitchStates[id] : earthSwitchStates[id];
+  state.isOpen = !state.isOpen;
+
+  // Update SVG appearance based on the new state
+  updateSwitchAppearance(id, state, isLineSwitch);
+
+  // Save the updated state to localStorage
+  localStorage.setItem(id, JSON.stringify(state));
+}
+
+// Function to update the appearance of a switch
+function updateSwitchAppearance(id, { isOpen, originalX2 }, isLineSwitch) {
+  let svg = d3.select('#' + id);
+  let newX2 = isOpen ? originalX2 - 20 : originalX2;
+  let newColor = isOpen ? "green" : "#ff0000";
+
+  svg.attr("x2", newX2);
+
+  // For line switches, change the color; for earth switches, just adjust x2
+  if (isLineSwitch) {
+    svg.style("stroke", newColor);
+    d3.select(svg.node().parentNode).selectAll('*').style("stroke", newColor);
+  }
+}
+
+// Initialize line switches
+function initializeLineSwitches() {
+  lineSvgIds.forEach(id => initializeSwitch(id, true));
+}
+
+// Initialize earth switches
+function initializeEarthSwitches() {
+  earthSvgIds.forEach(id => initializeSwitch(id, false));
+}
+
+// General function to initialize a switch
+function initializeSwitch(id, isLineSwitch) {
+  let savedState = JSON.parse(localStorage.getItem(id) || '{}');
+  let svg = d3.select('#' + id);
+  let originalX2 = savedState.originalX2 || parseFloat(svg.attr("x2"));
+  
+  let stateObj = isLineSwitch ? lineSwitchStates : earthSwitchStates;
+  
+  stateObj[id] = {
+    originalX2: originalX2,
+    isOpen: savedState.isOpen || false
+  };
+
+  updateSwitchAppearance(id, stateObj[id], isLineSwitch);
+
+  svg.on('click', () => toggleSwitchState(id, isLineSwitch));
+}
+
+// Wait for the DOM to be fully loaded before initializing
+document.addEventListener("DOMContentLoaded", function() {
+  initializeLineSwitches();
+  initializeEarthSwitches();
+});
+*/
+
+/*
+//lines svg swithces
+document.addEventListener("DOMContentLoaded", function() {
+    var svgIds = ['svg_134', 'svg_153', 'svg_70', 'svg_166', 'svg_71', 'svg_178', 'svg_96', 'svg_97', 'svg_202', 'svg_54', 'svg_120', 'svg_147'];
+
+    svgIds.forEach(function(id) {
+        var svg = d3.select('#' + id);
+        var savedState = JSON.parse(localStorage.getItem(id) || '{}');
+        var originalX2 = savedState.originalX2 || parseFloat(svg.attr("x2"));
+        var isOpen = savedState.isOpen || false;
+
+        // Apply saved state if exists
+        if (isOpen) {
+            // Open state: adjust x2 and color for the switch and its group
+            svg.attr("x2", originalX2 - 20);
+            svg.style("stroke", "green");
+            svg.node().parentNode.querySelectorAll('*').forEach(function(element) {
+                element.style.stroke = "green";
+            });
+        } else {
+            // Closed state: reset x2 and color for the switch
+            svg.attr("x2", originalX2);
+            svg.style("stroke", "#ff0000"); // Assuming black is the original color
+        }
+
+        svg.on('click', function() {
+            isOpen = !isOpen; // Toggle state
+            var newX2 = isOpen ? originalX2 - 20 : originalX2;
+            var newColor = isOpen ? "green" : "#ff0000"; // Toggle color
+
+            svg.attr("x2", newX2).style("stroke", newColor);
+
+            // If the switch is open, change the color of all elements in its group
+            if (isOpen) {
+                d3.select(this.parentNode).selectAll('*').style("stroke", newColor);
+            } else {
+                d3.select(this.parentNode).selectAll('*').style("stroke", "#ff0000"); // Reset to original color
+            }
+
+            // Update the state in localStorage
+            localStorage.setItem(id, JSON.stringify({ originalX2: originalX2, isOpen: isOpen }));
+        });
+    });
+});
+
+//Earth SVG Switches
+document.addEventListener("DOMContentLoaded", function() {
+    var svgIds = ['svg_142', 'svg_162', 'svg_82', 'svg_175', 'svg_90', 'svg_108', 'svg_96', 'svg_187', 'svg_116', 'svg_63', 'svg_54', 'svg_202', 'svg_129', 'svg_22', 'svg_49', 'svg_37'];
+
+    svgIds.forEach(function(id) {
+        var svg = d3.select('#' + id);
+        var savedState = JSON.parse(localStorage.getItem(id) || '{}');
+        var originalX2 = savedState.originalX2 || parseFloat(svg.attr("x2"));
+        var isOpen = savedState.isOpen || false;
+
+        // Apply saved state if exists
+        if (isOpen) {
+            // Open state: only adjust x2 for the switch
+            svg.attr("x2", originalX2 - 20);
+        } else {
+            // Closed state: only reset x2 for the switch
+            svg.attr("x2", originalX2);
+        }
+
+        svg.on('click', function() {
+            isOpen = !isOpen; // Toggle state
+            var newX2 = isOpen ? originalX2 - 20 : originalX2;
+
+            // Only toggle x2 without changing the color
+            svg.attr("x2", newX2);
+
+            // Update the state in localStorage
+            localStorage.setItem(id, JSON.stringify({ originalX2: originalX2, isOpen: isOpen }));
+        });
+    });
+});
+
+*/
+/*
+    
+// Loop over the SVG ids
+for (var i = 0; i < svgIdsx2.length; i++) {
+    // Get the SVG element
+    var svgElement = document.getElementById(svgIdsx2[i]);
+
+    // Store the original x2 value
+    var originalX2Value = parseFloat(svgElement.getAttribute('x2'));
+
+    // Add a click event listener to the SVG element
+    svgElement.addEventListener('click', (function(originalX2Value) {
+        return function() {
+            // Get the current x2 value
+            var currentX2Value = parseFloat(this.getAttribute('x2'));
+
+            // Switch the x2 value
+            if (currentX2Value === originalX2Value) {
+                this.setAttribute('x2', currentX2Value - 20);
+            } else {
+                this.setAttribute('x2', originalX2Value);
+            }
+        }
+    })(originalX2Value));
+}
+
+// Create a database object
+var databaseSVG = {};
+var svgIds = [134,153,70,166, 71, 178, 96, 97, 202, 54, 120, 147, 8];
+// Function to handle click event
+function handleClick(svg) {
+    // Store the original x2 value
+    var originalX2 = svg.attr("x2");
+
+    // Store the original color
+    var originalColor = svg.style("stroke");
+
+    // Add a click event listener
+    svg.on("click", function() {
+        // Get the current x2 value
+        var currentX2 = svg.attr("x2");
+
+        // Toggle the x2 value
+        if (currentX2 === originalX2) {
+            svg.attr("x2", currentX2 - 20);
+        } else {
+            svg.attr("x2", originalX2);
+        }
+
+        // Get the current color
+        var currentColor = d3.select(this.parentNode).selectAll("*").style("stroke");
+
+        // Toggle the color
+        if (currentColor == "orange") {
+            d3.select(this.parentNode).selectAll("*").style("stroke", originalColor);
+        } else {
+            d3.select(this.parentNode).selectAll("*").style("stroke", "orange");
+        }
+
+        // Store the values in the database
+        databaseSVG[svg.attr("id")] = {
+            x2: svg.attr("x2"),
+            color: d3.select(this.parentNode).selectAll("*").style("stroke")
+        };
+    });
+
+    var svgId = svg.attr("id");
+    var state = {
+        x2: svg.attr("x2"),
+        color: d3.select(svg.node().parentNode).selectAll("*").style("stroke")
+    };
+
+    localStorage.setItem(svgId, JSON.stringify(state));
+}
+
+
+
+svgIds.forEach(function(id) {
+    var svg = d3.select('#svg_' + id);
+    var savedState = localStorage.getItem(id);
+
+    if (savedState) {
+        var state = JSON.parse(savedState);
+        console.log(id, state); // Debugging line
+        svg.attr("x2", state.x2);
+        d3.select(svg.node().parentNode).selectAll("*").style("stroke", state.color);
+    }
+
+    svg.on('click', function() { handleClick(svg); });
+});
+
+*/
+   </script>
+
 </html>
