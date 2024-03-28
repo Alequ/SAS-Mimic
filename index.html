@@ -60,6 +60,7 @@
        <line transform="rotate(90 2919.2 781.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_36" y2="777.14184" x2="2919.197" y1="786.17773" x1="2919.197" stroke-width="4" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_37" y2="700.64364" x2="2917.69698" y1="743.34551" x1="2917.69698" stroke-width="6" fill="none"/>
       </g>
+<!--       
       <g id="svg_163">
        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_156" y2="1945.34571" x2="1125.67156" y1="1945.34571" x1="1156.36592" stroke-width="6" stroke="#00bf5f" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_157" y2="1942.64214" x2="1123.70053" y1="1966.67814" x1="1123.70053" stroke-width="6" fill="none"/>
@@ -68,7 +69,7 @@
        <line transform="rotate(90 1124.2 2041.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_160" y2="2034.13854" x2="1124.20163" y1="2049.17439" x1="1124.20163" stroke-width="4" fill="none"/>
        <line transform="rotate(90 1125.2 2047.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_161" y2="2043.13935" x2="1125.20054" y1="2052.17524" x1="1125.20054" stroke-width="4" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_162" y2="1966.64115" x2="1123.70053" y1="2009.34303" x1="1123.70053" stroke-width="6" fill="none"/>
-      </g>
+      </g> -->
       <g id="svg_83">
        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_76" y2="1948.3457" x2="1363.67108" y1="1948.3457" x1="1394.36544" stroke-width="6" stroke="#00bf5f" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_77" y2="1945.64214" x2="1361.70006" y1="1969.67814" x1="1361.70006" stroke-width="6" fill="none"/>
@@ -123,7 +124,8 @@
        <line transform="rotate(90 3349.2 2049.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_128" y2="2045.13936" x2="3349.19613" y1="2054.17525" x1="3349.19613" stroke-width="4" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_129" y2="1968.64115" x2="3347.69612" y1="2011.34303" x1="3347.69612" stroke-width="6" fill="none"/>
       </g>
-      <g id="svg_29">
+
+      <!-- <g id="svg_29">
        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_9" y2="1947.34571" x2="3594.66666" y1="1947.34571" x1="3625.36102" stroke-width="6" stroke="#00bf5f" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_10" y2="1944.64215" x2="3592.69563" y1="1968.67815" x1="3592.69563" stroke-width="6" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_13" y2="2008.63948" x2="3592.69563" y1="2036.67531" x1="3592.69563" stroke-width="6" fill="none"/>
@@ -131,7 +133,8 @@
        <line transform="rotate(90 3593.2 2043.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_15" y2="2036.13854" x2="3593.19673" y1="2051.1744" x1="3593.19673" stroke-width="4" fill="none"/>
        <line transform="rotate(90 3594.2 2049.66)" stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_11" y2="2045.13936" x2="3594.19565" y1="2054.17525" x1="3594.19565" stroke-width="4" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_22" y2="1968.64115" x2="3592.69563" y1="2011.34303" x1="3592.69563" stroke-width="6" fill="none"/>
-      </g>
+      </g> -->
+
       <g id="svg_176">
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_169" y2="2259.34509" x2="1224.67128" y1="2259.34509" x1="1260.36564" stroke-width="6" fill="none"/>
        <line stroke="#00bf5f" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_170" y2="2256.64152" x2="1224.70018" y1="2280.67752" x1="1224.70018" stroke-width="6" fill="none"/>
@@ -283,11 +286,206 @@
 // Centralized state objects for each type of switch
 //let lineSwitchStates = {};
 //let earthSwitchStates = {};
+// Assuming d3.js is included in your HTML
+// Define the data structure with initial states and placeholders for original x2 values
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Define configurations for each set of elements, including placeholders for original x2 values
+    const elementsConfigs = [
+        {
+            lineId: 'svg_134',
+            earthId: 'svg_142',
+            groupId: 'svg_217',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        {
+            lineId: 'svg_166',
+            earthId: 'svg_175',
+            groupId: 'svg_219',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        {
+          lineId: 'svg_153',
+            // No earthId for this set, indicating there's no Earth element
+            groupId: 'svg_218',
+            lineOpen: false,
+            
+            originalX2Line: null
+          
+        },
+        {
+            lineId: 'svg_70',
+            earthId: 'svg_82',
+            groupId: 'svg_220',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        {
+            lineId: 'svg_71',
+            earthId: 'svg_90',
+            groupId: 'svg_220',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        {
+            lineId: 'svg_178',
+            earthId: 'svg_187',
+            groupId: 'svg_222',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        {
+            lineId: 'svg_202',
+            earthId: 'svg_211',
+            groupId: 'svg_226',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        {
+            lineId: 'svg_8',
+            earthId: 'svg_37',
+            groupId: 'svg_228',
+            lineOpen: false,
+            earthOpen: true,
+            originalX2Line: null, // Placeholder for the original x2 of the line
+            originalX2Earth: null // Placeholder for the original x2 of the Earth
+        },
+        // Add configurations for additional sets as needed
+    ];
+
+    elementsConfigs.forEach((config) => {
+        config.originalX2Line = +d3.select(`#${config.lineId}`).attr('x2');
+        if (config.earthId) { // Only fetch and store Earth's x2 if it exists
+            config.originalX2Earth = +d3.select(`#${config.earthId}`).attr('x2');
+        }
+
+        d3.select(`#${config.lineId}`).on('click', function() { toggleLine(config); });
+        if (config.earthId) { // Only attach an Earth click event listener if it exists
+            d3.select(`#${config.earthId}`).on('click', function() { toggleEarth(config); });
+        }
+
+        updateState(config);
+    });
+
+    function toggleLine(config) {
+        if (config.earthId && !config.earthOpen) { // Check if Earth exists and is closed
+            alert("Cannot close the Breaker when Earth is closed.");
+            return;
+        }
+        config.lineOpen = !config.lineOpen;
+        updateState(config);
+    }
+
+    function toggleEarth(config) {
+        if (!config.earthId) return; // Exit if there's no Earth element
+
+        if (!config.lineOpen) {
+            alert("Cannot close the Earth when the Breaker is closed.");
+            return;
+        }
+        config.earthOpen = !config.earthOpen;
+        updateState(config);
+    }
+
+    function updateState(config) {
+        d3.select(`#${config.lineId}`).attr('x2', config.lineOpen ? config.originalX2Line - 20 : config.originalX2Line);
+        if (config.earthId) { // Only adjust Earth's x2 and calculate colors if Earth exists
+            d3.select(`#${config.earthId}`).attr('x2', config.earthOpen ? config.originalX2Earth - 20 : config.originalX2Earth);
+
+            let color = config.lineOpen && !config.earthOpen ? 'green' :
+                        config.lineOpen && config.earthOpen ? 'yellow' : 'red';
+            d3.select(`#${config.groupId}`).selectAll('*').style('stroke', color);
+        } else {
+            // Handle coloring or other states for when there's no Earth element
+            let color = config.lineOpen ? 'yellow' : 'red'; // Example adjustment
+            d3.select(`#${config.groupId}`).selectAll('*').style('stroke', color);
+        }
+    }
+});
+
+
+
+/*
+// Assuming d3 is already included in your project
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial setup: Save original x2 values and set initial states
+    const originalX2 = { 
+        line: +d3.select('#svg_134').attr('x2'), 
+        earth: +d3.select('#svg_142').attr('x2') 
+    };
+    let states = { 
+        line: false, // Line starts closed
+        earth: true  // Earth starts open
+    };
+
+    // Function to update the visual state and stroke color
+    function updateState() {
+    // Apply the x2 adjustment for open states
+    d3.select('#svg_134').attr('x2', states.line ? originalX2.line - 20 : originalX2.line);
+    d3.select('#svg_142').attr('x2', states.earth ? originalX2.earth - 20 : originalX2.earth);
+
+    // Determine the stroke color based on states
+    let color;
+    if (states.line && !states.earth) {
+        color = 'green'; // Line open, Earth closed
+    } else if (states.line && states.earth) {
+        color = 'yellow'; // Both open
+    } else {
+        color = 'red'; // Line closed
+    }
+
+    // Update the stroke color of all child elements within the group
+    d3.select('#svg_217').selectAll('*').style('stroke', color);
+}
+
+    // Toggle line state with restriction check
+    function toggleLine() {
+        if (!states.earth) {
+            alert("Cannot close the line when Earth is closed.");
+            return;
+        }
+        states.line = !states.line;
+        updateState();
+    }
+
+    // Toggle Earth state with restriction check
+    function toggleEarth() {
+        if (!states.line) {
+            alert("Cannot close the Earth when the line is closed.");
+            return;
+        }
+        states.earth = !states.earth;
+        updateState();
+    }
+
+    // Attach click event listeners
+    d3.select('#svg_134').on('click', toggleLine);
+    d3.select('#svg_142').on('click', toggleEarth);
+
+    // Initial update for correct visual representation
+    updateState();
+});
+
+
+
+/*
 // IDs for line switches and earth switches
 const lineSvgIds = ['svg_134', 'svg_153', 'svg_70', 'svg_166', 'svg_71', 'svg_178', 'svg_96', 'svg_97', 'svg_202', 'svg_54', 'svg_120', 'svg_147'];
 const earthSvgIds = ['svg_142', 'svg_162', 'svg_82', 'svg_175', 'svg_90', 'svg_108', 'svg_96', 'svg_187', 'svg_116', 'svg_63', 'svg_54', 'svg_202', 'svg_129', 'svg_22', 'svg_49', 'svg_37'];
-
 
 class Switch {
   constructor(id, originalX2) {
@@ -334,12 +532,30 @@ class LineSwitch extends Switch {
       
       circle.attr('fill', newColor);
     }
+
+    
+
+        
     d3.select(this.svg.node().parentNode).selectAll('*').style("stroke", newColor);
   }
 }
 
 class EarthSwitch extends Switch {
-  // Inherits everything from Switch, but can have custom methods or overrides if necessary
+   
+    updateAppearance() {
+        super.updateAppearance(); // Always call this to maintain base behavior
+        
+        // Then, specifically for svg_142, apply unique logic
+        if (this.id === 'svg_142') {
+            if (!this.isOpen) {
+                // This switch is closed, apply specific style
+                d3.select('#svg_217').selectAll('*').style("stroke", "#ff0000");
+            } else {
+                // This switch is open, revert specific style
+                d3.select('#svg_217').selectAll('*').style("stroke", "oragnge"); // Change "#000" to the original color
+            }
+        }
+    }
 }
 
 // Initialize switches
@@ -358,7 +574,7 @@ document.addEventListener("DOMContentLoaded", function() {
  
 });
 
-
+*/
 
 /*
 // Function to toggle the state of a switch
